@@ -1,0 +1,1 @@
+{"name":"Local: Coin Piles","url":"/Users/pulakesh/CP/CSES/Coin Piles.cpp","tests":[{"id":1707917962306,"input":"4\n2 1\n2 2\n3 3\n0 3","output":"YES\nNO\nYES\nNO"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/Users/pulakesh/CP/CSES/Coin Piles.cpp","group":"local","local":true}

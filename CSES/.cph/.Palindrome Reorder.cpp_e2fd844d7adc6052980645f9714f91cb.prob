@@ -1,0 +1,1 @@
+{"name":"Local: Palindrome Reorder","url":"/Users/pulakesh/CP/CSES/Palindrome Reorder.cpp","tests":[{"id":1707918880299,"input":"AAAACACBA","output":"AACABACAA"},{"id":1707919782774,"input":"AADDDCC","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/Users/pulakesh/CP/CSES/Palindrome Reorder.cpp","group":"local","local":true}

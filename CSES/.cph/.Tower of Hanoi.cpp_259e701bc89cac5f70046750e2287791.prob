@@ -1,0 +1,1 @@
+{"name":"Local: Tower of Hanoi","url":"/Users/pulakesh/CP/CSES/Tower of Hanoi.cpp","tests":[{"id":1707920595465,"input":"2","output":"3\n1 2\n1 3\n2 3"},{"id":1707921261929,"input":"3","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/Users/pulakesh/CP/CSES/Tower of Hanoi.cpp","group":"local","local":true}
