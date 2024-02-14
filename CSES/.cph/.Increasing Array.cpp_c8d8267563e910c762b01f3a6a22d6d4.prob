@@ -1,0 +1,1 @@
+{"name":"Local: Increasing Array","url":"/Users/pulakesh/CP/CSES/Increasing Array.cpp","tests":[{"id":1707761143008,"input":"5\n3 2 5 1 7","output":"5"},{"id":1707761389867,"input":"10\n1000000000 1 1 1 1 1 1 1 1 1","output":"8999999991"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/Users/pulakesh/CP/CSES/Increasing Array.cpp","group":"local","local":true}

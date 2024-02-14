@@ -1,0 +1,1 @@
+{"name":"Local: A","url":"/Users/pulakesh/CP/A.cpp","tests":[{"id":1692212140755,"input":"4\n)(\n(()\n()\n))()","output":"5\n0\n1\n50000000"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/Users/pulakesh/CP/A.cpp","group":"local","local":true}
