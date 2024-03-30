@@ -5,24 +5,30 @@ bool grid[9][9];
 int dR[4] = {0, 0, -1, 1};
 int dC[4] = {-1, 1, 0, 0};
 //            L  R  U  D
-map<char, int> dir;
+const int PATHLEN = 48;
+int path[PATHLEN];
 int maxIndex = -1;
-int countPath(string path, int index, int curR, int curC)
+int countPath(int index, int curR, int curC)
 {
     maxIndex = max(maxIndex, index);
     // vertically split into two disjoint sets
-    if ((grid[curR - 1][curC] && grid[curR + 1][curC]) && (!grid[curR][curC - 1] && !grid[curR][curC + 1]))
+    if ((grid[curR - 1][curC] && grid[curR + 1][curC]) &&
+        (!grid[curR][curC - 1] && !grid[curR][curC + 1]))
         return 0;
 
     // horizontally split into two disjoint sets
-    if ((grid[curR][curC - 1] && grid[curR][curC + 1]) && (!grid[curR - 1][curC] && !grid[curR + 1][curC]))
+    if ((grid[curR][curC - 1] && grid[curR][curC + 1]) &&
+        (!grid[curR - 1][curC] && !grid[curR + 1][curC]))
+        return 0;
+
+    if (grid[curR][curC])
         return 0;
 
     if (curR == 7 && curC == 1)
     {
         if (index == 48)
         {
-            cout << "found Path\n";
+            // cout << "found Path\n";
             return 1;
         }
         else
@@ -34,16 +40,8 @@ int countPath(string path, int index, int curR, int curC)
     int pathCount = 0;
     int newR, newC;
     grid[curR][curC] = true;
-    if (dir.find(path[index]) != dir.end())
-    {
-        newR = curR + dR[dir[path[index]]];
-        newC = curR + dC[dir[path[index]]];
-        // cout << curR << ", " << curC << " : " << path[index] << " => ";
-        // cout << newR << " " << newC << endl;
-        if (!grid[newR][newC])
-            pathCount = countPath(path, index + 1, newR, newC);
-    }
-    else
+
+    if (path[index] == 4)
     {
         for (int i = 0; i < 4; i++)
         {
@@ -51,25 +49,41 @@ int countPath(string path, int index, int curR, int curC)
             newC = curC + dC[i];
             if (grid[newR][newC])
                 continue;
-            pathCount += countPath(path, index + 1, newR, newC);
+            pathCount += countPath(index + 1, newR, newC);
         }
-        // cout << pathCount << endl;
     }
-    // cout << index << " " << path[index] << endl;
-    // cout << curR << " " << curC << " " << pathCount << endl;
+    else
+    {
+
+        newR = curR + dR[path[index]];
+        newC = curC + dC[path[index]];
+        // cout << path[index] << " " << curR << ", " << curC << " => " << newR << ", " << newC << endl;
+        if (!grid[newR][newC])
+            pathCount += countPath(index + 1, newR, newC);
+    }
+
     grid[curR][curC] = false;
     return pathCount;
 }
 
 int main()
 {
-    string path;
-    cin >> path;
+    string str;
+    cin >> str;
+    for (int i = 0; i < PATHLEN; i++)
+    {
+        if (str[i] == 'L')
+            path[i] = 0;
+        else if (str[i] == 'R')
+            path[i] = 1;
+        else if (str[i] == 'U')
+            path[i] = 2;
+        else if (str[i] == 'D')
+            path[i] = 3;
+        else
+            path[i] = 4;
+    }
 
-    dir['R'] = 1;
-    dir['L'] = 0;
-    dir['D'] = 3;
-    dir['U'] = 2;
     memset(grid, false, sizeof(grid));
     for (int i = 0; i < 9; i++)
     {
@@ -78,14 +92,12 @@ int main()
         grid[0][i] = true;
         grid[8][i] = true;
     }
-    // for (int i = 0; i < 9; i++)
-    // {
-    //     for (int j = 0; j < 9; j++)
-    //         cout << grid[i][j] << " ";
-    //     cout << endl;
-    // }
-    int index = 0, startR = 1, startC = 1, cellVisited = 0;
-    int ans = countPath(path, index, startR, startC);
-    cout << ans << " " << maxIndex << " " << path[maxIndex] << endl;
+
+    int index = 0, startR = 1, startC = 1;
+    int ans = countPath(index, startR, startC);
+    // for (int i = 0; i < PATHLEN; i++)
+    //     cout << path[i] << " ";
+    // cout << endl;
+    cout << ans << endl;
     ;
 }
