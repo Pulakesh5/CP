@@ -113,26 +113,38 @@ ll _pow(ll n, ll p)
 
 void solve()
 {
-    int n, k;
-    cin >> n >> k;
+    int n;
+    cin >> n;
 
-    vector<int> v(n);
+    vector<int> v(n), proxy, tmp;
     input(v, n);
-
-    if (k >= 2)
+    proxy = v;
+    sort(proxy.begin(), proxy.end());
+    if (proxy == v)
         cout << "YES\n";
     else
     {
-        for (int i = 1; i < n; i++)
+        while (true)
         {
-            if (v[i] < v[i - 1])
+            tmp = v;
+            for (int i = 1; i < (n - 1); i++)
+            {
+                if (v[i] > v[i - 1] && v[i] > v[i + 1])
+                    swap(v[i], v[i + 1]);
+            }
+            if (v == proxy)
+            {
+                cout << "YES\n";
+                return;
+            }
+            else if (v == tmp)
             {
                 cout << "NO\n";
                 return;
             }
         }
-        cout << "YES\n";
     }
+    return;
 }
 
 int32_t main()

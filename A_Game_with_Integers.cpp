@@ -113,26 +113,15 @@ ll _pow(ll n, ll p)
 
 void solve()
 {
-    int n, k;
-    cin >> n >> k;
+    int n;
+    cin >> n;
 
-    vector<int> v(n);
-    input(v, n);
-
-    if (k >= 2)
-        cout << "YES\n";
+    if (n % 3 == 0)
+        cout << "Second\n";
     else
-    {
-        for (int i = 1; i < n; i++)
-        {
-            if (v[i] < v[i - 1])
-            {
-                cout << "NO\n";
-                return;
-            }
-        }
-        cout << "YES\n";
-    }
+        cout << "First\n";
+
+    return;
 }
 
 int32_t main()

@@ -113,26 +113,36 @@ ll _pow(ll n, ll p)
 
 void solve()
 {
-    int n, k;
-    cin >> n >> k;
+    int a, b;
+    cin >> a >> b;
 
-    vector<int> v(n);
-    input(v, n);
+    vector<int> dx = {a, a, -1 * a, -1 * a, b, -1 * b, b, -1 * b};
+    vector<int> dy = {b, -1 * b, b, -1 * b, a, a, -1 * a, -1 * a};
 
-    if (k >= 2)
-        cout << "YES\n";
-    else
+    int xq, yq, xk, yk;
+    cin >> xq >> yq >> xk >> yk;
+
+    int xknight, yknight, nxk, nyk;
+    set<vector<int>> positions;
+    for (int k = 0; k < 8; k++)
     {
-        for (int i = 1; i < n; i++)
+        xknight = xq + dx[k];
+        yknight = yq + dy[k];
+        bool fork = false;
+        for (int j = 0; j < 8; j++)
         {
-            if (v[i] < v[i - 1])
+            nxk = xknight + dx[j];
+            nyk = yknight + dy[j];
+            if (nxk == xk && nyk == yk)
             {
-                cout << "NO\n";
-                return;
+                positions.insert({xknight, yknight});
             }
         }
-        cout << "YES\n";
     }
+
+    cout << positions.size() << endl;
+
+    return;
 }
 
 int32_t main()
@@ -150,7 +160,7 @@ int32_t main()
         cin >> test;
         while (test--)
         {
-            // cout<<"Case #"<<i<<": ";
+            // cout << "Case #" << i << ": \n";
             // cerr<<"\nCase #"<<i<<": \n";
             i++;
             solve();

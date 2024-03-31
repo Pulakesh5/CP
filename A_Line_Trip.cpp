@@ -113,26 +113,19 @@ ll _pow(ll n, ll p)
 
 void solve()
 {
-    int n, k;
-    cin >> n >> k;
+    int n, x;
+    cin >> n >> x;
 
     vector<int> v(n);
     input(v, n);
 
-    if (k >= 2)
-        cout << "YES\n";
-    else
+    int mxDiff = v[0];
+    for (int i = 1; i < n; i++)
     {
-        for (int i = 1; i < n; i++)
-        {
-            if (v[i] < v[i - 1])
-            {
-                cout << "NO\n";
-                return;
-            }
-        }
-        cout << "YES\n";
+        mxDiff = max(mxDiff, v[i] - v[i - 1]);
     }
+    mxDiff = max(mxDiff, 2 * (x - v[n - 1]));
+    cout << mxDiff << endl;
 }
 
 int32_t main()

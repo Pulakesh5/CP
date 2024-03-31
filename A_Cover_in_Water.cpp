@@ -113,26 +113,36 @@ ll _pow(ll n, ll p)
 
 void solve()
 {
-    int n, k;
-    cin >> n >> k;
+    int len;
+    cin >> len;
 
-    vector<int> v(n);
-    input(v, n);
+    string pat;
+    cin >> pat;
 
-    if (k >= 2)
-        cout << "YES\n";
-    else
+    int count = 0;
+    for (int i = 0, j; i < len; i = j)
     {
-        for (int i = 1; i < n; i++)
+        j = i + 1;
+        if (pat[i] == '#')
         {
-            if (v[i] < v[i - 1])
-            {
-                cout << "NO\n";
-                return;
-            }
+
+            continue;
         }
-        cout << "YES\n";
+
+        while (j < len && pat[j] == '.')
+        {
+            j++;
+        }
+        if (j - i > 2)
+        {
+            cout << 2 << endl;
+            return;
+        }
+
+        count += (j - i);
     }
+    cout << count << endl;
+    return;
 }
 
 int32_t main()
@@ -150,7 +160,7 @@ int32_t main()
         cin >> test;
         while (test--)
         {
-            // cout<<"Case #"<<i<<": ";
+            // cout << "Case #" << i << ": \n";
             // cerr<<"\nCase #"<<i<<": \n";
             i++;
             solve();
