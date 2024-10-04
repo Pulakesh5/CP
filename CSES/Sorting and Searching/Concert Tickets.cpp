@@ -5,31 +5,42 @@ int main()
 {
     int n, m;
     cin >> n >> m;
-    vector<int> tickets(n);
-    vector<pair<int, int>> bids(m);
+    int ticket;
+    map<int, int> ticket_freq;
+    vector<int> bids(m);
     for (int i = 0; i < n; i++)
-        cin >> tickets[i];
-    int bid;
-    for (int i = 0; i < m; i++)
     {
-        cin >> bid;
-        bids[i] = {bid, i};
+        cin >> ticket;
+        ticket_freq[ticket]++;
     }
 
-    sort(tickets.begin(), tickets.end());
-    sort(bids.begin(), bids.end());
-    int bid, start = 0, lb;
-    vector<int> bookings(m);
+    for (int i = 0; i < m; i++)
+        cin >> bids[i];
+
+    vector<int> bookings(m, -1);
+
     for (int i = 0; i < m; i++)
     {
-        bid = bids[i].first;
-        lb = lower_bound(tickets.begin() + start, tickets.end(), bid) - tickets.begin();
-        if (lb >= 0 && lb < n &&)
+        auto lb = ticket_freq.lower_bound(bids[i]);
+
+        if (lb == ticket_freq.end() || lb->first > bids[i])
         {
-            bookings[i] = tickets[lb];
-            start = lb + 1;
+            if (lb == ticket_freq.begin())
+            {
+                bookings[i] = -1;
+                continue;
+            }
+            lb--;
         }
-        else
-            bookings[i] = -1;
+        if (lb->second > 0)
+        {
+            bookings[i] = lb->first;
+            lb->second--;
+            if (lb->second == 0)
+                ticket_freq.erase(lb);
+        }
     }
+
+    for (int i = 0; i < m; i++)
+        cout << bookings[i] << endl;
 }

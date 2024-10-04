@@ -64,7 +64,6 @@ void print(vector<int> a)
 {
     for (auto it : a)
         cerr << it << " ";
-    cerr << endl;
 }
 const ll MOD = 1000000007;
 const ll mod = 998244353;
@@ -112,45 +111,89 @@ ll _pow(ll n, ll p)
 }
 /*-----------------------------CODE STARTS HERE-------------------------*/
 
-void solve()
+int f(vector<vector<int>> &dp, int pos, int previous, vector<int> &both_hungry, vector<int> &either_hungry, vector<int> &both_full)
 {
-    int n;
-    cin >> n;
+    int len = both_hungry.size();
 
-    vector<pair<int, int>> vp(n + 1);
-    for (int i = 1; i <= n; i++)
+    if (pos >= len)
+        return 0;
+    if (dp[pos][previous] != -1)
+        return dp[pos][previous];
+    int ans1 = 0, ans2 = 0;
+    if (previous)
     {
-        cin >> vp[i].first;
-        vp[i].second = i;
+        // feed current hare now
+        ans1 = f(dp, pos + 1, 1, both_hungry, either_hungry, both_full) + either_hungry[pos];
+        // feed current hare after next hare
+        if (pos + 1 < len)
+            ans2 = f(dp, pos + 1, 0, both_hungry, either_hungry, both_full) + both_full[pos];
+        // cerr << "previous fed" << endl;
+        // cerr << "Index " << pos << " : " << ans1 << ", " << ans2 << endl;
     }
-
-    sort(vp.begin() + 1, vp.end());
-    vector<int> next(n + 1), sum(n + 1), ans(n + 1);
-    next[0] = 0;
-    sum[0] = 0;
-    for (int i = 1; i <= n; i++)
+    else
     {
-        if (next[i - 1] >= i)
+        // feed current hare now
+        ans1 = f(dp, pos + 1, 1, both_hungry, either_hungry, both_full) + both_hungry[pos];
+        // feed current hare after next hare
+        if (pos + 1 < len)
+            ans2 = f(dp, pos + 1, 0, both_hungry, either_hungry, both_full) + either_hungry[pos];
+        // cerr << "previous not fed" << endl;
+        // cerr << "Index " << pos << " : " << ans1 << ", " << ans2 << endl;
+    }
+    return dp[pos][previous] = max(ans1, ans2);
+}
+vector<int> recoverPods(int n, vector<vector<int>> &conn, vector<vector<int>> &queries)
+{
+    vector<bool> active(n, false);
+    vector<vector<int>> adj(n);
+    for (auto edge : conn)
+    {
+        adj[edge[0]].push_back(edge[1]);
+        adj[edge[1]].push_back(edge[0]);
+    }
+}
+bool calculate(map<int, int> &cacheFreq, int mid)
+{
+    long long time = 0;
+    for (auto it : cacheFreq)
+    {
+        time = 0;
+        time += min(1ll * it.second, time);
+        time += 2 * max(0ll, it.second - time);
+        if (time > mid)
+            return false;
+    }
+    return true;
+}
+int getMin(int n, vector<int> &cache)
+{
+    map<int, int> freq;
+    for (int i = 0; i < n; i++)
+        freq[cache[i]]++;
+
+    long long l = 1, r = 1e18;
+    long long ans, mid;
+    while (l <= r)
+    {
+        mid = (l + r) / 2;
+        if (calculate(freq, mid))
         {
-            next[i] = next[i - 1];
-            sum[i] = sum[i - 1];
+            ans = min(ans, mid);
+            r = mid - 1;
         }
         else
-        {
-            sum[i] = sum[i - 1] + vp[i].first;
-            next[i] = i;
-            while (next[i] + 1 <= n && sum[i] >= vp[next[i] + 1].first)
-            {
-                next[i]++;
-                sum[i] += vp[next[i]].first;
-            }
-        }
-        ans[vp[i].second] = next[i];
+            l = mid + 1;
     }
-    for (int i = 1; i <= n; i++)
-        cout << ans[i] - 1 << " ";
-    cout << endl;
+    return ans;
 }
+void solve()
+{
+    int arr[3] = {1, 2, 3};
+    int *p = arr;
+    *p++ += ++*p;
+    cout << arr[0] << " " << arr[1] << " " << arr[2] << endl;
+}
+
 int32_t main()
 {
     fastio();
@@ -163,11 +206,11 @@ int32_t main()
 #endif // ONLINE_JUDGE
 
         int test = 1, i = 1;
-        cin >> test;
+        // cin >> test;
         while (test--)
         {
             // cout<<"Case #"<<i<<": ";
-            // cerr << "\nCase #" << i << ": \n";
+            // cerr<<"\nCase #"<<i<<": \n";
             i++;
             solve();
             // cout << '\n';

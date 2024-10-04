@@ -64,7 +64,6 @@ void print(vector<int> a)
 {
     for (auto it : a)
         cerr << it << " ";
-    cerr << endl;
 }
 const ll MOD = 1000000007;
 const ll mod = 998244353;
@@ -111,46 +110,68 @@ ll _pow(ll n, ll p)
     return res;
 }
 /*-----------------------------CODE STARTS HERE-------------------------*/
+int firstSetBit(int n)
+{
+    if (n == 0)
+        return 0;
+    // Position variable initialize with 1
+    // m variable is used to check the set bit
+    int position = 1;
+    int m = 1;
 
+    while (!(n & m))
+    {
+
+        // left shift
+        m = m << 1;
+        position++;
+    }
+    return position;
+}
 void solve()
 {
-    int n;
-    cin >> n;
+    int n, q;
+    cin >> n >> q;
 
-    vector<pair<int, int>> vp(n + 1);
-    for (int i = 1; i <= n; i++)
+    vector<int> nums(n), pos(n), pw(q);
+    for (int i = 0; i < n; i++)
     {
-        cin >> vp[i].first;
-        vp[i].second = i;
+        cin >> nums[i];
+        pos[i] = firstSetBit(nums[i]) - 1;
     }
-
-    sort(vp.begin() + 1, vp.end());
-    vector<int> next(n + 1), sum(n + 1), ans(n + 1);
-    next[0] = 0;
-    sum[0] = 0;
-    for (int i = 1; i <= n; i++)
+    input(pw, q);
+    set<int> visited;
+    // print(pos);
+    // cerr << endl;
+    for (int j = 0; j < q; j++)
     {
-        if (next[i - 1] >= i)
+        int it = pw[j];
+        if (visited.find(it) != visited.end())
+            continue;
+        visited.insert(it);
+
+        bool flag = false;
+        // cerr << "power " << it << endl;
+        for (int i = 0; i < n; i++)
         {
-            next[i] = next[i - 1];
-            sum[i] = sum[i - 1];
-        }
-        else
-        {
-            sum[i] = sum[i - 1] + vp[i].first;
-            next[i] = i;
-            while (next[i] + 1 <= n && sum[i] >= vp[next[i] + 1].first)
+            if (it <= pos[i])
             {
-                next[i]++;
-                sum[i] += vp[next[i]].first;
+                nums[i] += (1 << (it - 1));
+                pos[i] = it - 1;
+                // cerr << i << " " << it - 1 << endl;
             }
+            if (pos[i])
+                flag = true;
         }
-        ans[vp[i].second] = next[i];
+        if (!flag)
+            break;
     }
-    for (int i = 1; i <= n; i++)
-        cout << ans[i] - 1 << " ";
+
+    for (int i = 0; i < n; i++)
+        cout << nums[i] << " ";
     cout << endl;
 }
+
 int32_t main()
 {
     fastio();
