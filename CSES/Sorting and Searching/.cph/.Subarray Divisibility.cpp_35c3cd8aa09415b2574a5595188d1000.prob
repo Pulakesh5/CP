@@ -1,0 +1,1 @@
+{"name":"Local: Subarray Divisibility","url":"/Users/pulakesh/CP/CSES/Sorting and Searching/Subarray Divisibility.cpp","tests":[{"id":1729021713098,"input":"5\n3 1 2 7 4\n","output":"1"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/Users/pulakesh/CP/CSES/Sorting and Searching/Subarray Divisibility.cpp","group":"local","local":true}

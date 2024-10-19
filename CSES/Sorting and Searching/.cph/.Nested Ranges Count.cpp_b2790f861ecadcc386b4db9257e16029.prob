@@ -1,0 +1,1 @@
+{"name":"Local: Nested Ranges Count","url":"/Users/pulakesh/CP/CSES/Sorting and Searching/Nested Ranges Count.cpp","tests":[{"id":1728763151833,"input":"4\n1 6\n2 4\n4 8\n3 6","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/Users/pulakesh/CP/CSES/Sorting and Searching/Nested Ranges Count.cpp","group":"local","local":true}

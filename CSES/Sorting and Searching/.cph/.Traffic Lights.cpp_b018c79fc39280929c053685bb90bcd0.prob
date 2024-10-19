@@ -1,0 +1,1 @@
+{"name":"Local: Traffic Lights","url":"/Users/pulakesh/CP/CSES/Sorting and Searching/Traffic Lights.cpp","tests":[{"id":1728199558096,"input":"8 3\n3 6 2","output":"5 3 3"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/Users/pulakesh/CP/CSES/Sorting and Searching/Traffic Lights.cpp","group":"local","local":true}
