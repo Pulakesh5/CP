@@ -1,0 +1,1 @@
+{"name":"Local: E-Knapsack","url":"/Users/pulakesh/CP/AtCoder/Prcatice Problems/E-Knapsack.cpp","tests":[{"id":1731099859992,"input":"3 8\n3 30\n4 50\n5 60\n","output":"90"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/Users/pulakesh/CP/AtCoder/Prcatice Problems/E-Knapsack.cpp","group":"local","local":true}

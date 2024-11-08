@@ -1,0 +1,1 @@
+{"name":"Local: Counting Rooms","url":"/Users/pulakesh/CP/CSES/Graph Algorithms/Counting Rooms.cpp","tests":[{"id":1730623211103,"input":"5 8\n########\n#..#...#\n####.#.#\n#..#...#\n########","output":"3"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/Users/pulakesh/CP/CSES/Graph Algorithms/Counting Rooms.cpp","group":"local","local":true}
