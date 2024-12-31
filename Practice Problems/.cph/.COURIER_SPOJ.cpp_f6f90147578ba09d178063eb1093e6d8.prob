@@ -1,0 +1,1 @@
+{"name":"Local: COURIER_SPOJ","url":"/Users/pulakesh/CP/Practice Problems/COURIER_SPOJ.cpp","tests":[{"id":1735108646042,"input":"1\n5 7 2\n1 2 7\n1 3 5\n1 5 2\n2 4 10\n2 5 1\n3 4 3\n3 5 4\n3\n1 4 2\n5 3 1\n5 1 1","output":"43"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/Users/pulakesh/CP/Practice Problems/COURIER_SPOJ.cpp","group":"local","local":true}
